@@ -5,7 +5,7 @@ on:
     branches: [ "main", "develop" ]
 
 jobs:
-  build-proyect:
+  build-project:
     name: Build Project
     runs-on: ubuntu-latest
 
