@@ -38,20 +38,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-project
     environment: test
+
     steps:
       - name: Show basic GitHub variables
         run: |
-          echo "Repositorio: $GITHUB_REPOSITORY"
-          echo "Rama: $GITHUB_REF_NAME"
-          echo "Autor del push: $GITHUB_ACTOR"
-          echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
-          echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
-          echo "ARM_TENANT_ID: $ARM_TENANT_ID"
-          echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
+          echo "ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}"
+          echo "ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}"
+          echo "ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}"
+          echo "ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}"
 
-      - name: Show GitHub context (JSON)
-        run: |
-          echo '${{ toJson(github) }}'
+
 
   deploy-azure-arquitecture:
     name: Deploy to Azure Arquitecture
@@ -60,6 +56,11 @@ jobs:
     environment: test
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
       - name: Clone terraform scripts repository
         uses: actions/checkout@v4
         with:
