@@ -19,10 +19,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      
-      - name: Install dependencies
-        run: ls -la && pwd
-
 
       - name: Install dependencies
         run: npm i
@@ -35,7 +31,8 @@ jobs:
         with:
           name: web-build
           path: dist
-
+          retention-days: 1
+          
   show-env-vars:
     name: Show GitHub Environment Variables
     runs-on: ubuntu-latest
@@ -46,17 +43,34 @@ jobs:
         run: |
           echo "Repositorio: $GITHUB_REPOSITORY"
           echo "Rama: $GITHUB_REF_NAME"
-          echo "Commit SHA: $GITHUB_SHA"
           echo "Autor del push: $GITHUB_ACTOR"
+          echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
+          echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
+          echo "ARM_TENANT_ID: $ARM_TENANT_ID"
+          echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
 
       - name: Show GitHub context (JSON)
         run: |
           echo '${{ toJson(github) }}'
 
-  deploy-azure-webapp:
+  deploy-azure-arquitecture:
     name: Deploy to Azure Web App
     runs-on: ubuntu-latest
-    needs: build-project
+    needs: show-env-vars
+
+    steps:
+      - name: Clone terraform scripts repository
+        uses: actions/checkout@v4
+        with:
+          repository: codeparce/azure-terraform
+    
+      - name: Verify files
+        run: ls -la azure-terraform
+
+  deploy-azure-static-web-app:
+    name: Deploy to Azure Web App
+    runs-on: ubuntu-latest
+    needs: deploy-azure-arquitecture
 
     steps:
       - name: Download build artifact
