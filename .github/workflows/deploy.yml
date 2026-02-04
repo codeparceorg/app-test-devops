@@ -1,7 +1,5 @@
 name: deploy to azure web app
 
-permissions:
-  contents: read
 
 on:
   push:
