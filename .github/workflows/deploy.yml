@@ -17,15 +17,15 @@ jobs:
         with:
           inlineScript: |
             az login --service-principal \
-              --username $ARM_CLIENT_ID \
-              --password $ARM_CLIENT_SECRET \
-              --tenant $ARM_TENANT_ID
+              --username "${{ vars.ARM_CLIENT_ID }}" \
+              --password "${{ vars.ARM_CLIENT_SECRET }}" \
+              --tenant "${{ vars.ARM_TENANT_ID }}"
 
       - name: Set subscription
         uses: azure/cli@v2
         with:
           inlineScript: |
-            az account set --subscription "$ARM_SUBSCRIPTION_ID"
+            az account set --subscription "${{vars.ARM_SUBSCRIPTION_ID}}"
 
       - name: Test Azure access
         uses: azure/cli@v2
