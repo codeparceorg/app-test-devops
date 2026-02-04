@@ -10,13 +10,15 @@ jobs:
     name: Azure Login Test
     runs-on: ubuntu-latest
     environment: test
-    env:
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
     steps:
+      - name: Debug tenant presence
+        run: |
+          if [ -z "$ARM_TENANT_ID" ]; then
+            echo "❌ ARM_TENANT_ID is EMPTY"
+          else
+            echo "✅ ARM_TENANT_ID is set"
+          fi
       - name: Azure Login test
         run: |
           az login --service-principal \
