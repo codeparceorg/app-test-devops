@@ -99,10 +99,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: static-web-app-secrets
-          path: ./static-web-app-secrets.json
+          path: secret
 
       - name: Verify build files
         run: ls -la dist
 
       - name: Verify build files
-        run: cat static-web-app-secrets.json
+        run: cat secret/static-web-app-secrets.json
