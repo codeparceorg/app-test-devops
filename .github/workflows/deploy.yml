@@ -73,7 +73,7 @@ jobs:
         run: cd azure-terraform/2-static-web-app && source .env
 
       - name: Validate files and environment
-        run: ls -la azure-terraform/2-static-web-app && echo $TF_VAR_resource_group_name
+        run: source .env && ls -la ./ && echo "TF :" $TF_VAR_resource_group_name
 
   deploy-azure-static-web-app:
     name: Deploy to Azure Web App
