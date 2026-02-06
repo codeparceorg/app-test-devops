@@ -2,11 +2,11 @@ name: Init CI Workflow
 
 permissions:
   contents: read
-  
+
 on:
   push:
     branches: [ "main" ]
 
 jobs:
   build:
-    uses: codeparce/ci-workflows/.github/workflows/node-build.yml@main
+    uses: codeparce/ci-workflows/.github/workflows/node-build.yml
