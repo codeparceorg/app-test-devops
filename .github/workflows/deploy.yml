@@ -42,6 +42,11 @@ jobs:
     name: Deploy to Azure Arquitecture
     runs-on: ubuntu-latest
     environment: test
+    env:
+      ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ vars.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
     steps:
       - name: Checkout code
@@ -60,7 +65,7 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            cd azure-terraform/2-static-web-app  && bash azure_deploy_arquitecture.sh
+            cd azure-terraform/2-static-web-app && bash azure_deploy_arquitecture.sh
 
 
   deploy-azure-static-web-app:
