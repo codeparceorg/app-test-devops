@@ -8,6 +8,10 @@ on:
     branches: [ "main", "develop" , test]
   workflow_dispatch:
 
+concurrency:
+  group: terraform-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build-project:
     name: Build Project
@@ -71,6 +75,13 @@ jobs:
           cd azure-terraform/2-static-web-app
           bash azure_deploy_arquitecture.sh
 
+      - name: Upload Static Web App secrets artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-web-app-secrets
+          path: static-web-app-secrets.json
+          retention-days: 1
+
 
   deploy-azure-static-web-app:
     name: Deploy to Azure Web App
@@ -84,5 +95,14 @@ jobs:
           name: web-build
           path: dist
 
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: static-web-app-secrets
+          path: static-web-app-secrets.json
+
       - name: Verify build files
         run: ls -la dist
+
+      - name: Verify build files
+        run: cat static-web-app-secrets.json
