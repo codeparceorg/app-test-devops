@@ -10,3 +10,7 @@ on:
 jobs:
   build:
     uses: codeparce/ci-workflows/.github/workflows/node-build.yml@main
+    with:
+      config-path: .github/labeler.yml
+    secrets:
+      personal_access_token: ${{ secrets.TERRAFORM_REPO_TOKEN }}
