@@ -119,4 +119,4 @@ jobs:
           ENV_NAME=$([ "$GITHUB_REF_NAME" = "main" ] && echo "production" || echo "$GITHUB_REF_NAME")
           FILE_JSON="secret/static-web-app-secrets.json"
           API_KEY=$(jq -r '.properties.apiKey' $FILE_JSON)
-          swa deploy ./dist --deployment-token $API_KEY --env $GITHUB_REF_NAME
+          swa deploy ./dist --deployment-token $API_KEY --env $ENV_NAME
