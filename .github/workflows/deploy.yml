@@ -79,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: static-web-app-secrets
-          path: secret
+          path: azure-terraform/2-static-web-app/secret
           retention-days: 1
 
 
