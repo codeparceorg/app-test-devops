@@ -49,31 +49,19 @@ jobs:
         with:
           fetch-depth: 0 
 
-      - name: Azure Login CLI
-        uses: azure/cli@v2
-        with:
-          inlineScript: |
-            az login --service-principal --username "${{ vars.ARM_CLIENT_ID }}" \
-              --password "${{ vars.ARM_CLIENT_SECRET }}" --tenant "${{ vars.ARM_TENANT_ID }}"
-
-      - name: Set subscription
-        uses: azure/cli@v2
-        with:
-          inlineScript: |
-            az account set --subscription "${{vars.ARM_SUBSCRIPTION_ID}}"
-
       - name: Clone terraform scripts repository
         uses: actions/checkout@v4
         with:
           repository: codeparce/azure-terraform
           token: ${{ secrets.TERRAFORM_REPO_TOKEN }}
           path: azure-terraform
-    
-      - name: Entry in the 2-static-web-app directory
-        run: cd azure-terraform/2-static-web-app && source .env
 
-      - name: Validate files and environment
-        run: source .env && ls -la ./ && echo "TF :" $TF_VAR_resource_group_name
+      - name: Azure scripts execution
+        uses: azure/cli@v2
+        with:
+          inlineScript: |
+            cd azure-terraform/2-static-web-app  && azure_deploy_arquitecture.sh
+
 
   deploy-azure-static-web-app:
     name: Deploy to Azure Web App
