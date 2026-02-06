@@ -11,4 +11,6 @@ jobs:
   build:
     uses: codeparce/ci-workflows/.github/workflows/node-build.yml@main
     with:
+      config-path: .github/labeler.yml
       node-version: 20
+    secrets: inherit
