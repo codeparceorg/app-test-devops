@@ -60,7 +60,7 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            cd azure-terraform/2-static-web-app  && azure_deploy_arquitecture.sh
+            cd azure-terraform/2-static-web-app  && bash azure_deploy_arquitecture.sh
 
 
   deploy-azure-static-web-app:
