@@ -1,11 +1,12 @@
 name: Init CI Workflow
 
 permissions:
-  contents: read
+  contents: read  
   
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,4 +15,3 @@ jobs:
       config-path: .github/labeler.yml
       node-version: 20
     secrets: inherit
-    
