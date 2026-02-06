@@ -5,4 +5,4 @@ on:
 
 jobs:
   build:
-    uses: codeparce/ci-workflows/.github/workflows/node-build.yml@v1
+    uses: codeparce/ci-workflows/.github/workflows/node-build.yml@main
