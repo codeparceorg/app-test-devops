@@ -89,6 +89,16 @@ jobs:
     needs:  [build-project,deploy-azure-arquitecture]
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+          
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
@@ -100,16 +110,6 @@ jobs:
         with:
           name: static-web-app-secrets
           path: secret
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 
-          
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
 
       - name: Install SWA CLI
         run: npm install -g @azure/static-web-apps-cli  && ls -la 
