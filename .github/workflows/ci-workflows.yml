@@ -10,6 +10,6 @@ on:
 
 jobs:
   build:
-    uses: codeparce/ci-workflows/.github/workflows/node-build.yml@main
+    uses: codeparce/ci-workflows/.github/workflows/node-init.yml@main
     with:
       node-version: 20
