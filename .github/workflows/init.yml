@@ -1,0 +1,12 @@
+name: Init CI Workflow
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  node-build:
+    uses: codeparce/ci-workflows/.github/workflows/node-build.yml@main
+    with:
+      environment: dev
+
+
