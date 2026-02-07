@@ -13,4 +13,3 @@ jobs:
     uses: codeparce/ci-workflows/.github/workflows/node-init.yml@main
     with:
       node-version: 20
-      environment: test
