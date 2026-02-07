@@ -1,5 +1,3 @@
-name: Init CI Workflow
-
 permissions:
   contents: read  
   
@@ -10,6 +8,7 @@ on:
 
 jobs:
   init:
+    name: Init CI Workflow
     uses: codeparce/ci-workflows/.github/workflows/node-init.yml@main
     with:
       node-version: 20
