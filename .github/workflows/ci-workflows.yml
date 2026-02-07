@@ -12,5 +12,5 @@ jobs:
     uses: codeparceorg/ci-workflows/.github/workflows/node-init.yml@main
     with:
       node-version: 20
-
+    secrets: inherit
       
